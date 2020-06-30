@@ -14,3 +14,15 @@ export const fetchUser = () => async dispatch => {
     console.log('error on fetching user', error)
   }
 }
+
+export const handleStripeToken = token => async dispatch => {
+  try {
+    const res = await axios.post(`${API}/api/stripe`, token)
+    dispatch({
+      type: FETCH_USER,
+      payload: res.data
+    })
+  } catch (error) {
+    console.error('error on handling stripe token', error);
+  }
+}

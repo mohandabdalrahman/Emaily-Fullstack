@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Payments from '../payments/payments';
 const Header = ({ auth }) => {
   const URL = 'http://localhost:5000';
   const renderContent = () => {
@@ -9,9 +10,15 @@ const Header = ({ auth }) => {
         return;
       case false:
         return (
-          <li>
-            <a href={`${URL}/auth/google`}>Login with Google</a>
-          </li>
+          <>
+            <li>
+              <Payments />
+            </li>
+            <li style={{ margin: '0 10px' }}>Credits: {auth.credits}</li>
+            <li>
+              <a href={`${URL}/auth/google`}>Login with Google</a>
+            </li>
+          </>
         );
       default:
         return (
