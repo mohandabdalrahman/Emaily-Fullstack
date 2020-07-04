@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { FETCH_USER } from './types'
+import history from '../../history'
 const API = 'http://localhost:5000'
 
 export const fetchUser = () => async dispatch => {
@@ -24,5 +25,18 @@ export const handleStripeToken = token => async dispatch => {
     })
   } catch (error) {
     console.error('error on handling stripe token', error);
+  }
+}
+
+export const submitSurvey = values => async dispatch => {
+  try {
+    const response = await axios.post(`${API}/api/surveys`, values)
+    dispatch({
+      type: FETCH_USER,
+      payload: response.data
+    })
+    history.push('/')
+  } catch (error) {
+    console.log('Error on submit survey:', error)
   }
 }
